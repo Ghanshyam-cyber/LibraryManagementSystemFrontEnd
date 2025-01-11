@@ -11,7 +11,7 @@ export default function BooksTable() {
     const fetchBooks = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/manager/books/${managerId}`
+          `http://localhost:8080/manager/${managerId}/books`
         );
         if (response.ok) {
           const data = await response.json();
@@ -31,13 +31,13 @@ export default function BooksTable() {
   }, [managerId]);
 
   return (
-    <div>
+    <div className="container">
       <h2>Books Managed by Manager {managerId}</h2>
       {books.length > 0 ? (
-        <table class="table table-bordered">
+        <table class="table table-bordered mt-5">
         <thead>
           <tr>
-            <th scope="col">Book Id</th>
+            {/* <th scope="col">Book Id</th> */}
             <th scope="col">Name</th>
             <th scope="col">Author</th>
             <th scope="col">Status</th>
@@ -46,7 +46,7 @@ export default function BooksTable() {
         <tbody>
           {books.map((books)=> (
             <tr key={books.id}>
-              <td>{books.id}</td>
+              {/* <td>{books.id}</td> */}
               <td>{books.bookName}</td>
               <td>{books.authorName}</td>
               <td>{books.status}</td>

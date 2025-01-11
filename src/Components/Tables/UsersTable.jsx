@@ -4,6 +4,7 @@ import { useParams } from 'react-router'
 function UsersTable() {
     const {managerId} = useParams();
     const [user, setUser] = useState([]);
+    const [books ,setBooks] =useState([])
 
     useEffect(()=>{
         if(!managerId) return;
@@ -11,11 +12,11 @@ function UsersTable() {
         const fetchUsers = async () => {
             try {
                 const response = await fetch(
-                `http://localhost:8080/manager/users/${managerId}`
+                `http://localhost:8080/manager/${managerId}/users`
                 );
                 if(response.ok){
                     const data = await response.json();
-                    setUser(data)
+                    setUser(data) 
                 }
                 
             } catch (error) {
@@ -29,13 +30,13 @@ function UsersTable() {
 
 
   return (
-    <div>
+    <div className='container'>
       <h2>Users Managed by Manager {managerId}</h2>
       {user.length > 0 ? (
-        <table class="table table-bordered">
+        <table class="table table-bordered mt-5">
         <thead>
           <tr>
-            <th scope="col">User Id</th>
+            {/* <th scope="col">User Id</th> */}
             <th scope="col">Fist Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
@@ -47,14 +48,14 @@ function UsersTable() {
         <tbody>
           {user.map((user)=> (
             <tr key={user.id}>
-              <td>{user.id}</td>
+              {/* <td>{user.id}</td> */}
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td>{user.email}</td>
               <td>{user.mobileNumber}</td>
-              {/* <td  key={books.id}>
-                <li>{books.bookName}</li>
-              </td> */}
+              <td  key={books.id}>
+                {books.bookName}
+              </td>
 
             </tr>
           ))}
