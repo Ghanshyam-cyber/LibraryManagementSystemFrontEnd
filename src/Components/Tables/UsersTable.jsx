@@ -24,7 +24,9 @@ function UsersTable() {
 
             }            
         };
+
         fetchUsers();
+        
     }, [managerId]);
 
 
@@ -41,21 +43,19 @@ function UsersTable() {
             <th scope="col">Last Name</th>
             <th scope="col">Email</th>
             <th scope="col">Mobile No.</th>
-            <th scope="col">Books</th>
+            {/* <th scope="col">Books</th> */}
 
           </tr>
         </thead>
         <tbody>
-          {user.map((user)=> (
-            <tr key={user.id}>
+          {user.map((user,books) => (
+            <tr key={user.id} >
               {/* <td>{user.id}</td> */}
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td>{user.email}</td>
               <td>{user.mobileNumber}</td>
-              <td  key={books.id}>
-                {books.bookName}
-              </td>
+              {/* <td>{books.bookName}</td> */}
 
             </tr>
           ))}
