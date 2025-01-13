@@ -44,10 +44,10 @@ function Navbar() {
                 Search
               </button> */}
               <div>
-              <Link class="nav-link" to="/login" role="button">Login</Link>
+              <Link className="nav-link" to="/login" role="button">Login</Link>
               </div>
               <div>
-              <Link class="nav-link mx-2" to="/register" role="button">Register</Link>
+              <Link className="nav-link mx-2" to="/register" role="button">Register</Link>
               </div>
             </form>
           </div>

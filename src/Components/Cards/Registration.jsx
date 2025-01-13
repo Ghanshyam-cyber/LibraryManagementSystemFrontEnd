@@ -2,7 +2,7 @@ import React from "react";
 
 function Registration() {
   return (
-    <div className="container mt-3 border border-light rounded" style={{width: "50rem",  height: "50rem"}}>
+    <div className="container mt-3 border border-grey rounded" style={{width: "50rem",  height: "50rem"}}>
         <div className="container mt-3"><h2 className="text-center">Registration Form</h2><hr /></div>
       <form className="row g-3 mt-3 mx-2 mb-2">
       <div className="col-md-6">

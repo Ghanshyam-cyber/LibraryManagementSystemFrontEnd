@@ -32,12 +32,12 @@ export default function BooksTable() {
 
   return (
     <div className="container">
-      <h2>Books Managed by Manager {managerId}</h2>
+      <h2 className="text-center mt-3">Books Managed by Manager {managerId}</h2>
       {books.length > 0 ? (
-        <table class="table table-bordered mt-5">
+        <table className="table table-bordered mt-5">
         <thead>
           <tr>
-            {/* <th scope="col">Book Id</th> */}
+            <th scope="col">Book Id</th>
             <th scope="col">Name</th>
             <th scope="col">Author</th>
             <th scope="col">Status</th>
@@ -46,10 +46,10 @@ export default function BooksTable() {
         <tbody>
           {books.map((books)=> (
             <tr key={books.id}>
-              {/* <td>{books.id}</td> */}
+              <td>{books.bookId}</td>
               <td>{books.bookName}</td>
               <td>{books.authorName}</td>
-              <td>{books.status}</td>
+              <td>{books.status ? "Availabe" : "Not Available"}</td>
             </tr>
           ))}
         </tbody>
