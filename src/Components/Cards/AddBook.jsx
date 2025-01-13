@@ -27,7 +27,7 @@ export default function AddBook() {
 
     // Validation 
     if(!bookDetails.authorName || !bookDetails.authorName || !bookDetails.status){
-      setMessage("Please fill in all fields before submitting.")
+      setMessage("Please fill all the fields before submitting.")
       return;
     }
 
@@ -96,7 +96,7 @@ export default function AddBook() {
            className="form-check-input" 
            type="checkbox" 
            role="switch" 
-           id="flexSwitchCheckDefault" 
+           id="status" 
            checked={bookDetails.status}
            onChange={handleOnChange}
            />
@@ -109,7 +109,7 @@ export default function AddBook() {
             onClick={handleSubmit}
             className="btn btn-primary"
           >
-            Add Book
+            Add
           </button>
         </div>
 

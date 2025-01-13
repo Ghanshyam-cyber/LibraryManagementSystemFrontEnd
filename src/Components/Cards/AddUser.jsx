@@ -129,7 +129,7 @@ export default function AddUser() {
             className="btn btn-primary"
             onClick={handleSubmit}
           >
-            Add User
+            Add
           </button>
         </div>
 

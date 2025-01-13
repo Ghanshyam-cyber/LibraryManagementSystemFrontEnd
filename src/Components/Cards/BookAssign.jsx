@@ -105,7 +105,7 @@ function BookAssign() {
             onClick={handleSubmit}
             className="btn btn-primary"
           >
-            Add Book
+            Assign
           </button>
         </div>
 
