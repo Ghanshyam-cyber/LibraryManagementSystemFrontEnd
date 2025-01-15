@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 export default function BooksTable() {
   const { managerId } = useParams();
   const [books, setBooks] = useState([]);
+  const [alert, setAlert] = useState({ visible: false, message: "", type: "" });
 
   useEffect(() => {
     if (!managerId) return;
@@ -29,8 +30,7 @@ export default function BooksTable() {
     // .then((error) => console.error("Error fetching Data: " + error));
   }, [managerId]);
 
-
-  // Handle Delete 
+  // Handle Delete
   const handleDelete = async (bookId) => {
     try {
       const response = await fetch(
@@ -40,19 +40,41 @@ export default function BooksTable() {
         }
       );
       if (response.ok) {
-        setBooks(books.filter((book) => book.id !== bookId));
-        alert("Book deleted successfully.");
+        setBooks(books.filter((book) => book.bookId !== bookId));
+        setAlert({
+          visible: true,
+          message: "Book deleted successfully",
+          type: "success",
+        });
       } else {
-        alert("Failed to delete Book!");
+        setAlert({
+          visible: true,
+          message: "Book deleted successfully",
+          type: "danger",
+        });
       }
     } catch (error) {
       console.error("Some error occured: ", error);
-      alert("Some error occcured while deleting book.");
+      setAlert({
+        visible: true,
+        message: "Book deleted successfully",
+        type: "danger",
+      });
     }
+    setTimeout(() => {
+      setAlert({visible: false, message : "", type : ""})
+    }, 2000);
   };
 
   return (
     <div className="container">
+      <div className="container mt-3">
+        {alert.visible && (
+          <div className={`alert alert-${alert.type}`} role="alert">
+            {alert.message}
+          </div>
+        )}
+      </div>
       <h2 className="text-center mt-3">Books Managed by Manager {managerId}</h2>
       {books.length > 0 ? (
         <table className="table table-bordered mt-5">
@@ -67,7 +89,7 @@ export default function BooksTable() {
           </thead>
           <tbody>
             {books.map((book) => (
-              <tr key={book.id}>
+              <tr key={book.bookId}>
                 <td>{book.bookId}</td>
                 <td>{book.bookName}</td>
                 <td>{book.authorName}</td>
@@ -76,7 +98,7 @@ export default function BooksTable() {
                   {/* Delete button */}
                   <button
                     className="btn btn-danger"
-                    onClick={() => handleDelete(book.id)}
+                    onClick={() => handleDelete(book.bookId)}
                   >
                     Delete
                   </button>

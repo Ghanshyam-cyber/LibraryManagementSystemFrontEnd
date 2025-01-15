@@ -10,7 +10,11 @@ export default function AddBook() {
     status: false,
   });
 
-  const [message, setMessage] = useState();
+  const [alert, setAlert] = useState({
+    visibile: false,
+    message: "",
+    type: "",
+  });
 
   const handleOnChange = (event) => {
     const { id, value, type, checked } = event.target;
@@ -20,14 +24,21 @@ export default function AddBook() {
     }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Submitting Book Details:", bookDetails);
 
-    // Validation 
-    if(!bookDetails.authorName || !bookDetails.authorName || !bookDetails.status){
-      setMessage("Please fill all the fields before submitting.")
+    // Validation
+    if (
+      !bookDetails.authorName ||
+      !bookDetails.authorName ||
+      !bookDetails.status
+    ) {
+      setAlert({
+        visibile: true,
+        message: "Please fill all the fields",
+        type: "danger",
+      });
       return;
     }
 
@@ -42,16 +53,31 @@ export default function AddBook() {
           body: JSON.stringify(bookDetails),
         }
       );
-      if(response.ok){
-        setMessage("Book Added Successfully...!")
-        setBookDetails({bookName : "", authorName : "", status : false});
-      }else {
-        setMessage("Failed to add book. Please try again.");
+      if (response.ok) {
+        setAlert({
+          visibile: true,
+          message: "Book added successfully",
+          type: "success",
+        });
+        setBookDetails({ bookName: "", authorName: "", status: false });
+      } else {
+        setAlert({
+          visibile: true,
+          message: "Failed to add book",
+          type: "danger",
+        });
       }
     } catch (error) {
       console.error("Error adding Book");
-      setMessage("An error occured. Please try again.")
+      setAlert({
+        visibile: true,
+        message: "Some error occured. Please try again later.",
+        type: "danger",
+      });
     }
+    setTimeout(() => {
+      setAlert({ visible: false, message: "", type: "" });
+    }, 2000);
   };
 
   return (
@@ -60,8 +86,15 @@ export default function AddBook() {
       style={{ width: "40rem", height: "auto" }}
     >
       <div className="container mt-3">
+        {alert.visibile && (
+          <div className={`alert alert-${alert.type}`} role="alert">
+            {alert.message}
+          </div>
+        )}
+      </div>
+      <div className="container mt-3">
         <h3 className="text-center">ADD BOOK</h3>
-        
+
         <hr className="hr" />
       </div>
       <form className="row g-3 mt-3 mx-2 mb-2">
@@ -91,15 +124,15 @@ export default function AddBook() {
             onChange={handleOnChange}
           />
         </div>
-         <div className="form-check form-switch">
+        <div className="form-check form-switch">
           <input
-           className="form-check-input" 
-           type="checkbox" 
-           role="switch" 
-           id="status" 
-           checked={bookDetails.status}
-           onChange={handleOnChange}
-           />
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="status"
+            checked={bookDetails.status}
+            onChange={handleOnChange}
+          />
         </div>
         <hr className="hr" />
 
@@ -112,8 +145,6 @@ export default function AddBook() {
             Add
           </button>
         </div>
-
-        <div className="container text-center mt-3">{message}</div>
       </form>
     </div>
   );

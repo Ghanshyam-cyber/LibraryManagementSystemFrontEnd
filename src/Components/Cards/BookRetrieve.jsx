@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router";
 
 function BookRetrieve() {
-  const [message, setMessage] = useState();
+  const [alert, setAlert] = useState({ visible: false, message: "", type: "" });
   const { managerId } = useParams();
   const [assign, setAssign] = useState({
     userId: "",
@@ -11,8 +11,8 @@ function BookRetrieve() {
     // bookName: "",
   });
 
-   // Handle changes to input fields
-   const handleOnChange = (event) => {
+  // Handle changes to input fields
+  const handleOnChange = (event) => {
     const { id, value } = event.target;
     setAssign((prev) => ({
       ...prev,
@@ -39,14 +39,29 @@ function BookRetrieve() {
           userId: "",
           bookId: "",
         });
-        setMessage("Book has been Return successfully.");
-      }else{
-        setMessage("Book not Returned. Please try again later.");
+        setAlert({
+          visible: true,
+          message: "Book returned successfully.",
+          type: "success",
+        });
+      } else {
+        setAlert({
+          visible: true,
+          message: "Failed to return book.",
+          type: "danger",
+        });
       }
     } catch (error) {
-        console.error("Some error occured!" , error);
-        setMessage("Some error occcured. Please again later.")
+      console.error("Some error occured!", error);
+      setAlert({
+        visible: true,
+        message: "Some error occured. Please try again later.",
+        type: "danger",
+      });
     }
+    setTimeout(() => {
+      setAlert({ visible: false, message: "", type: "" });
+    }, 2000);
   };
 
   return (
@@ -54,6 +69,13 @@ function BookRetrieve() {
       className="container mt-3 border border-grey rounded"
       style={{ width: "40rem", height: "auto" }}
     >
+      <div className="container mt-3">
+        {alert.visible && (
+          <div className={`alert alert-${alert.type}`} role="alert">
+            {alert.message}
+          </div>
+        )}
+      </div>
       <div className="container mt-3">
         <h3 className="text-center">RETURN BOOK</h3>
 
@@ -108,11 +130,9 @@ function BookRetrieve() {
             Retrieve Book
           </button>
         </div>
-
-        <div className="container text-center mt-3">{message}</div>
       </form>
     </div>
   );
 }
 
-export default BookRetrieve ;
+export default BookRetrieve;

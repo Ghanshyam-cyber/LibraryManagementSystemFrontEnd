@@ -9,7 +9,7 @@ export default function AddUser() {
     email: "",
     mobileNumber: "",
   });
-  const [message, setMessage] = useState();
+  const [alert, setAlert] = useState({ visible: false, message: "", type: "" });
 
   const handleOnChange = (event) => {
     const { id, value } = event.target;
@@ -19,16 +19,25 @@ export default function AddUser() {
     }));
   };
 
-    // const handleOnChange = (event) => {
-    //     setUserDetails(event.target.value);
-    // }
+  // const handleOnChange = (event) => {
+  //     setUserDetails(event.target.value);
+  // }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if(!userDetails.firstName || !userDetails.lastName || !userDetails.email || !userDetails.mobileNumber){
-        setMessage("Please fill all fields before sumitting.")
-        return;
+    if (
+      !userDetails.firstName ||
+      !userDetails.lastName ||
+      !userDetails.email ||
+      !userDetails.mobileNumber
+    ) {
+      setAlert({
+        visible: true,
+        message: "Please fill all the fields.",
+        type: "danger",
+      });
+      return;
     }
 
     try {
@@ -49,15 +58,31 @@ export default function AddUser() {
           email: "",
           mobileNumber: "",
         });
-        setMessage("User added successfully...!");
+        setAlert({
+          visible: true,
+          message: "User added successfully.",
+          type: "success",
+        });
       } else {
         const errorData = await response.text();
-        alert("Error: " + errorData);
+        // alert("Error: " + errorData);
+        setAlert({
+          visible: true,
+          message: "Failed to add user.",
+          type: "danger",
+        });
       }
     } catch (error) {
-      setMessage("Some error occur while addind user. please try again later.");
-      alert("An error occurred while adding the user.");
+      setAlert({
+        visible: true,
+        message: "Some error occured. Please try again later",
+        type: "danger",
+      });
+      // alert("An error occurred while adding the user.");
     }
+    setTimeout(() => {
+      setAlert({ visible: false, message: "", type: "" });
+    }, 2000);
   };
 
   return (
@@ -65,6 +90,13 @@ export default function AddUser() {
       className="container mt-3 border border-grey rounded"
       style={{ width: "40rem", height: "auto" }}
     >
+      <div className="container mt-3">
+        {alert.visible && (
+          <div className={`alert alert-${alert.type}`} role="alert">
+            {alert.message}
+          </div>
+        )}
+      </div>
       <div className="container mt-3">
         <h2 className="text-center">ADD USER</h2>
         <hr />
@@ -132,8 +164,6 @@ export default function AddUser() {
             Add
           </button>
         </div>
-
-        <div className="contaier text-center">{message}</div>
       </form>
     </div>
   );
