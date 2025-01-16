@@ -1,12 +1,11 @@
 import React from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router";
 
-function Navbar() {
-  const {managerId} = useParams();
+function Navbar({ managerId }) {
+  // const {managerId,userId, bookId} = useParams();
   const navigate = useNavigate();
-  // const handleSubmit = () =>{
-  //   navigate(`/users/${managerId}`);
-  // }
+  
+  console.log("Navbar managerId:", managerId);
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -49,10 +48,28 @@ function Navbar() {
                 Search
               </button> */}
               <div>
-              <button className="nav-link" to={`/users/${managerId}`} role="button">Users</button>
+                <button
+                  className="nav-link"
+                  onClick={() => {
+                    if (managerId) {
+                      navigate(`/users/${managerId}`);
+                    } else {
+                      console.error("Manager ID is undefined");
+                    }
+                  }}
+                  role="button"
+                >
+                  Users
+                </button>
               </div>
               <div>
-              <Link className="nav-link mx-2" to="/register" role="button">Register</Link>
+                <Link
+                  className="nav-link mx-2"
+                  to={`books/${managerId}`}
+                  role="button"
+                >
+                  Register
+                </Link>
               </div>
             </form>
           </div>
