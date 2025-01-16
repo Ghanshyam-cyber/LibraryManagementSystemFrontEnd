@@ -1,81 +1,30 @@
 import React from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 
-function Navbar({ managerId }) {
-  // const {managerId,userId, bookId} = useParams();
-  const navigate = useNavigate();
+function Navbar() {
   
-  console.log("Navbar managerId:", managerId);
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            Library Management System
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/about">
-                  About
-                </Link>
-              </li>
-            </ul>
-            <form className="d-flex" role="search">
-              {/* <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button> */}
-              <div>
-                <button
-                  className="nav-link"
-                  onClick={() => {
-                    if (managerId) {
-                      navigate(`/users/${managerId}`);
-                    } else {
-                      console.error("Manager ID is undefined");
-                    }
-                  }}
-                  role="button"
-                >
-                  Users
-                </button>
-              </div>
-              <div>
-                <Link
-                  className="nav-link mx-2"
-                  to={`books/${managerId}`}
-                  role="button"
-                >
-                  Register
-                </Link>
-              </div>
-            </form>
-          </div>
+      <nav className="navbar navbar-expand-lg bg-light rounded-5 mx-auto mt-3" style={{maxWidth: "95%"}}>
+        <div className="container-fluid justify-content-center ">
+          <a className="navbar-brand border-radius" to="#" style={{textAlign: "center"}}>
+            <img
+              src="/images/logo.png"
+              alt="Library"
+              width="30"
+              height="24"
+            />
+            <span className="ms-2">Library Management System</span>
+            <img className="ms-2"
+              src="/images/logo.png"
+              alt="Library"
+              width="30"
+              height="24"
+            />
+          </a>        
         </div>
       </nav>
-    </div>
+   </div>
   );
 }
 

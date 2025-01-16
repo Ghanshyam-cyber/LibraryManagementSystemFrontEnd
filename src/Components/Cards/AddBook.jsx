@@ -142,7 +142,7 @@ export default function AddBook() {
         )}
       </div>
       <div className="container mt-3">
-        <h3 className="text-center">{bookId ? "UPDATE BOOK" : "ADD BOOK"}</h3>
+        <h3 className="text-center">{bookId ? "UPDATE BOOK QUANTITY" : "ADD BOOK"}</h3>
         <hr className="hr" />
       </div>
       <form className="row g-3 mt-3 mx-2 mb-2">
@@ -156,7 +156,7 @@ export default function AddBook() {
             id="bookName"
             placeholder="Book name"
             value={bookDetails.bookName}
-            onChange={handleOnChange}
+            onChange={bookId? "" : handleOnChange}
           />
         </div>
         <div className="col-12">
@@ -169,7 +169,7 @@ export default function AddBook() {
             id="authorName"
             placeholder="Author name"
             value={bookDetails.authorName}
-            onChange={handleOnChange}
+            onChange={bookId? "" : handleOnChange}
           />
         </div>
         <div className="col-12">

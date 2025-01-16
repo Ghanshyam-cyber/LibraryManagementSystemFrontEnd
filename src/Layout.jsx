@@ -1,15 +1,16 @@
 import React from 'react'
 import Navbar from './Components/Header/Navbar'
-import Footer from './Components/Footer/Footer'
+// import Footer from './Components/Footer/Footer'
 import { Outlet } from 'react-router'
+
 
 
 function Layout() {
   return (
     <div>
-      <Navbar />
+      <Navbar  />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

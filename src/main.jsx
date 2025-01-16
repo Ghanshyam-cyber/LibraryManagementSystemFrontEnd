@@ -17,6 +17,7 @@ import AddUser from "./Components/Cards/AddUser.jsx";
 import AddBook from "./Components/Cards/AddBook.jsx";
 import BookAssign from "./Components/Cards/BookAssign.jsx";
 import BookRetrieve from "./Components/Cards/BookRetrieve.jsx";
+import ApiDocs from "../ApiDocs.jsx";
 
 
 
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
       { path: "/addBook/:managerId/updateBook/:bookId", element: <AddBook /> },
       {path: "/assign/:managerId", element : <BookAssign />},
       {path: "/return/:managerId" , element: <BookRetrieve />},
+      {path: "/docs", element: <ApiDocs />},
 
 
     ],
