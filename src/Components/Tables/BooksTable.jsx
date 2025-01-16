@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 
 export default function BooksTable() {
   const { managerId } = useParams();
   const [books, setBooks] = useState([]);
   const [alert, setAlert] = useState({ visible: false, message: "", type: "" });
+  // const [bookDetails, setBookDetails] = {
+  //   bookName: "",
+  //   authorName: "",
+  //   noOfCopies: "",
+  // };
 
   useEffect(() => {
     if (!managerId) return;
@@ -62,7 +67,7 @@ export default function BooksTable() {
       });
     }
     setTimeout(() => {
-      setAlert({visible: false, message : "", type : ""})
+      setAlert({ visible: false, message: "", type: "" });
     }, 2000);
   };
 
@@ -83,7 +88,7 @@ export default function BooksTable() {
               <th scope="col">Book Id</th>
               <th scope="col">Name</th>
               <th scope="col">Author</th>
-              <th scope="col">Status</th>
+              {/* <th scope="col">Status</th> */}
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -93,22 +98,27 @@ export default function BooksTable() {
                 <td>{book.bookId}</td>
                 <td>{book.bookName}</td>
                 <td>{book.authorName}</td>
-                <td>{book.status ? "Availabe" : "Not Available"}</td>
+                {/* <td>{book.status ? "Availabe" : "Not Available"}</td> */}
                 <td>
-                  {/* Delete button */}
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => handleDelete(book.bookId)}
-                  >
-                    Delete
-                  </button>
+                  {/* Delete book */}
+                  <div className="container">
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(book.bookId)}
+                    >
+                      Delete
+                    </button>
+                    <div className="ml-3 vr"> </div>
+                    <div className="vr"> </div>
+                    <div className="vr"> </div>
 
-                  {/* <button
-                    className="btn btn-success"
-                    onClick={() => handleDelete(books.id)}
-                  >
-                    Delete
-                  </button> */}
+                    {/* Update button redirects to AddBook with prepopulated data */}
+                    <Link
+                      to={`/addBook/${managerId}/updateBook/${book.bookId}`}
+                    >
+                      <button className=" btn btn-primary">Update</button>
+                    </Link>
+                  </div>
                 </td>
               </tr>
             ))}

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
 function UsersTable() {
   const { managerId } = useParams();
   const [user, setUser] = useState([]);
-  // const [books ,setBooks] = useState([]);
   const [alert, setAlert] = useState({ visible: false, message: "", type: "" });
 
   useEffect(() => {
@@ -113,12 +112,15 @@ function UsersTable() {
                     Delete
                   </button>
 
-                  {/* <button
-                    className="btn btn-success"
-                    onClick={() => handleDelete(books.id)}
-                  >
-                    Delete
-                  </button> */}
+                  <div className="ml-3 vr"> </div>
+                    <div className="vr"> </div>
+                    <div className="vr"> </div>
+                  {/* Update button redirects to AddBook with prepopulated data */}
+                  <Link
+                      to={`/addUser/${managerId}/updateUser/${user.userId}`}
+                    >
+                      <button className=" btn btn-primary">Update</button>
+                    </Link>
                 </td>
               </tr>
             ))}

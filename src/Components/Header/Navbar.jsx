@@ -1,8 +1,12 @@
 import React from "react";
-import { Link, useParams } from "react-router";
+import { Link, Navigate, useNavigate, useParams } from "react-router";
 
 function Navbar() {
   const {managerId} = useParams();
+  const navigate = useNavigate();
+  // const handleSubmit = () =>{
+  //   navigate(`/users/${managerId}`);
+  // }
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -45,7 +49,7 @@ function Navbar() {
                 Search
               </button> */}
               <div>
-              <Link className="nav-link" to={`/users/${managerId}`} role="button">Users</Link>
+              <button className="nav-link" to={`/users/${managerId}`} role="button">Users</button>
               </div>
               <div>
               <Link className="nav-link mx-2" to="/register" role="button">Register</Link>

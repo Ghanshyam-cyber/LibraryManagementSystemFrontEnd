@@ -19,6 +19,7 @@ import BookAssign from "./Components/Cards/BookAssign.jsx";
 import BookRetrieve from "./Components/Cards/BookRetrieve.jsx";
 
 
+
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
 //     <Route path='/' element={ <Layout /> }  >
@@ -42,9 +43,12 @@ const router = createBrowserRouter([
       { path: "/books/:managerId", element: <BooksTable /> },
       { path: "/users/:managerId", element: <UsersTable /> },
       { path: "/addUser/:managerId", element: <AddUser /> },
+      { path: "/addUser/:managerId/updateUser/:userId", element: <AddUser /> },
       { path: "/addBook/:managerId", element: <AddBook /> },
+      { path: "/addBook/:managerId/updateBook/:bookId", element: <AddBook /> },
       {path: "/assign/:managerId", element : <BookAssign />},
-      {path: "/return/:managerId" , element: <BookRetrieve />}
+      {path: "/return/:managerId" , element: <BookRetrieve />},
+
 
     ],
   },
